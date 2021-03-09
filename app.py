@@ -38,6 +38,7 @@ app = Flask(__name__)
 @app.route("/")
 @log
 def index():
+    DB.set_table()
     return render_template('index.html')
 
 #------------- init flask .py------------
@@ -47,18 +48,20 @@ def index():
 def id(name='undefine'):
     r = request.form
     user = r['user']
+    max_users = DB.get_max()
     if not user:
+        DB.insert_user(name)
         return render_template('id.html', name=name) 
     else:
         return render_template('id.html', name=user) 
 
 @log
-@app.route('/json', methods=['GET', 'POST'])
+@app.route('/json', methods=['GET'])
 def results():
     resp = jsonify(DB.get_users())
     return resp
 
-@app.route("/inc")
+@app.route("/inc", methods=['GET'])
 @log
 def inc():
     DB.insert_user(name)
