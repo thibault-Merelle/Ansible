@@ -22,7 +22,7 @@
        - openssl
        - libssl-dev
        - libssl-doc
-    tags: packages
+     tags: packages
 
    - name: install PostgresSQL
      apt: name={{ item }} update_cache=true state=installed
