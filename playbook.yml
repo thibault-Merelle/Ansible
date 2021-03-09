@@ -1,0 +1,14 @@
+- name: set up hanging game in my azure vm
+  hosts: azure-vm-thibault
+  remote_user: azureuser
+  tasks:
+   - name: create folder /hanging-game
+     file:
+       path: /home/azureuser/hanging-game
+       state: directory
+       mode: '0755'
+   - name: copy souce files
+     copy:
+       src: /home/simplon/Bureau/projets_Python/projet_pendu
+       dest: /home/azureuser/hanging-game
+       mode: '0755'
