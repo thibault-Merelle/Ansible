@@ -1,14 +1,14 @@
-- name: set up hanging game in my azure vm
+- name: set up azure-vm
   hosts: azure-vm-thibault
   remote_user: azureuser
   tasks:
-   - name: create folder /hanging-game
+   - name: create folder /pansible
      file:
-       path: /home/azureuser/hanging-game
+       path: /home/azureuser/pansible
        state: directory
        mode: '0755'
-   - name: copy souce files
+   - name: copy source files
      copy:
-       src: /home/simplon/Bureau/projets_Python/projet_pendu
-       dest: /home/azureuser/hanging-game
+       src: /home/simplon/Bureau/Ansible
+       dest: /home/azureuser/pansible
        mode: '0755'
