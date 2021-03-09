@@ -24,15 +24,15 @@ class DB:
         self._dbcon.close()
 
     def set_table(self):
-        self._cursor.execute('CREATE TABLE IF NOT EXISTS users (id SERIAL, name VARCHAR(100))')
+        self._cursor.execute('CREATE TABLE IF NOT EXISTS users (id SERIAL, names VARCHAR(100))')
         self._dbcon.commit()
 
     def test_insert(self):
-        self._cursor.execute('INSERT INTO users (name) values ('Martin'), ('Arthur')')
+        self._cursor.execute('INSERT INTO users (names) values ('Martin'), ('Arthur')')
         self._dbcon.commit()
 
     def insert_user(self, name):
-        query = 'INSERT INTO users (name) values (%s)'
+        query = 'INSERT INTO users (names) values (%s)'
         self._cursor.execute(query, name)
         self._dbcon.commit()
 
@@ -41,3 +41,8 @@ class DB:
         users = self._cursor.fetchall()
         users.sort()
         return users #jsonify sur le app.py
+
+    def get_max(self):
+        self._cursor.execute('SELECT MAX(id) from users;')
+        max_id = self._cursor.fetchall()
+        return max_id

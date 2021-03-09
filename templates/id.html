@@ -1,21 +1,24 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style_aboutpage.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Hello {{ name }}</title>
 </head>
 <body>
     <h1>Hello {{ name | upper }} welcome to about page</h1>
 
-    <div class = buttons>
+    <div class = "wrapper">
         <center>
             <form method="POST" action="{{ url_for('index') }}">
                 <input type="submit" placeholder="back to homepage" value="{{ index }}">
             </form>
-            <form method="POST" action="{{ url_for('results') }}">
-                <input type="submit" placeholder="back to results page" value="{{ results }}">
+                <button><a href="/json">results</a></button>
             </form>
         </center>
+    </div>
+    <div id="max_log">
+        <h2>number of users in db</h2>
+        {{ max_users }}
     </div>
 </body>
 </html>
