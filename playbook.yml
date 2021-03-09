@@ -1,60 +1,130 @@
 - name: set up azure-vm
   hosts: azure-vm-thibault
+  become: yes
+  become_method: sudo
   remote_user: azureuser
+  app_name: Ansible
+
+  vars:
+  
+    dbname: ansible_data
+    dbuser: user
+    dbpassword: pwd123
+    github_user: thibault-Merelle
+    AZ_user: azureuser
+  
   tasks:
 
-   - name: create folder /pansible
-     file:
-       path: /home/azureuser/pansible
-       state: directory
-       mode: '0755'
+  # - name: create folder /pansible
+  #   file:
+  #    path: /home/azureuser/pansible
+  #    state: directory
+  #    #mode: '0755'
 
-   - name: copy source files
-     copy:
-       src: /home/simplon/Bureau/Ansible
-       dest: /home/azureuser/pansible
-       mode: '0755'
+  # - name: copy source files
+  #   copy:
+  #     src: /home/simplon/Bureau/Ansible
+  #     dest: /home/azureuser/pansible
+  #     mode: '0755'
+  - name: clone git repository
+    git:
+      repo: "https://github.com/{{ github_user }}/{{ app_name }}.git"
+      dest: /home/{{ AZ_user }}/{{ app_name }}
+      update: yes
 
-   - name: Ensure bash, OpenSSl, and libssl are the latest versions
-     apt: name={{ item }} update_cache=true state=latest
-     with_items:
-       - bash
-       - openssl
-       - libssl-dev
-       - libssl-doc
-     tags: packages
 
-   - name: install PostgresSQL
-     apt: name={{ item }} update_cache=true state=installed
-     with_items:
-       - postgresql
-       - postgresql-contrib
-       - libpq-dev
-       - python-psycopg2
-     tags: packages
+  - name: Ensure bash, OpenSSl, and libssl are the latest versions
+    apt: name={{ item }} update_cache=true state=latest
+    with_items:
+      - bash
+      - openssl
+      - libssl-dev
+      - libssl-doc
+    tags: packages
 
-   - name: Ensure the PostgreSQL service is running
-     service: name=postgresql state=started enabled=yes
+  - name: ensure apt cache is up to date
+    apt: update_cache=yes
 
-   - name: Ensure database is created
-     sudo_user: postgres
-     postgresql_db: name=ansible_data
-               encoding='UTF-8'
-               lc_collate='en_US.UTF-8'
-               lc_ctype='en_US.UTF-8'
-               template='template0'
-               state=present
+  - name: ensure packages are installed
+    apt: name={{ item }}
+    with_items:
+        - postgresql
+        - libpq-dev
+        - python-psycopg2
 
-   - name: manage permitions
-     sudo_user: postgres
-     postgresql_user: db=ansible_data
-                 name=user
-                 password=pwd123
-                 priv=ALL
-                 state=present
 
-   - name: check database
-     sudo_user: postgres
-     postgresql_user: name=user
-                 role_attr_flags=NOSUPERUSER,NOCREATEDB
-                 state=pr
+  - name: ensure database is created
+    postgresql_db: name={{ dbname }} state=started enabled=yes
+
+  - name: ensure user has access to database
+    postgresql_user: db={{ dbname }} name={{ dbuser }} password={{ dbpassword }} priv=ALL
+
+  - name: ensure user does not have unnecessary privilege
+    postgresql_user: name={{ dbuser }} role_attr_flags=NOSUPERUSER,NOCREATEDB
+  
+  - name: ensure no other user can access the database
+    postgresql_privs: db={{ dbname }} role=PUBLIC type=database priv=ALL state=absent
+
+
+
+
+# - name: set up azure-vm
+#   hosts: azure-vm-thibault
+#   remote_user: azureuser
+#   tasks:
+
+#    - name: create folder /pansible
+#      file:
+#        path: /home/azureuser/pansible
+#        state: directory
+#        mode: '0755'
+
+#    - name: copy source files
+#      copy:
+#        src: /home/simplon/Bureau/Ansible
+#        dest: /home/azureuser/pansible
+#        mode: '0755'
+
+#    - name: Ensure bash, OpenSSl, and libssl are the latest versions
+#      apt: name={{ item }} update_cache=true state=latest
+#      with_items:
+#        - bash
+#        - openssl
+#        - libssl-dev
+#        - libssl-doc
+#      tags: packages
+
+#    - name: install PostgresSQL
+#      apt: name={{ item }} update_cache=true state=installed
+#      with_items:
+#        - postgresql
+#        - postgresql-contrib
+#        - libpq-dev
+#        - python-psycopg2
+#      tags: packages
+
+#    - name: Ensure the PostgreSQL service is running
+#      service: name=postgresql state=started enabled=yes
+
+#    - name: Ensure database is created
+#      sudo_user: postgres
+#      postgresql_db: name=ansible_data
+#                 encoding='UTF-8'
+#                 lc_collate='en_US.UTF-8'
+#                 lc_ctype='en_US.UTF-8'
+#                 template='template0'
+#                 state=present
+
+#    - name: manage permitions
+#      sudo_user: postgres
+#      postgresql_user: db=ansible_data
+#                  name=user
+#                  password=pwd123
+#                  priv=ALL
+#                  state=present
+
+#    - name: check database
+#      sudo_user: postgres
+#      postgresql_user: name=user
+#                  role_attr_flags=NOSUPERUSER,NOCREATEDB
+#                  state=pr
