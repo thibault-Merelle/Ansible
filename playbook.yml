@@ -15,37 +15,46 @@
        dest: /home/azureuser/pansible
        mode: '0755'
 
-    - name: install PostgresSQL
-      apt: name=PostgresSQL update_cache=true state=installed
-      with_items:
-        - postgresql
-        - postgresql-contrib
-        - libpq-dev
-        - python-psycopg2
-      tags: packages
+   - name: Ensure bash, OpenSSl, and libssl are the latest versions
+     apt: name={{ item }} update_cache=true state=latest
+     with_items:
+       - bash
+       - openssl
+       - libssl-dev
+       - libssl-doc
+    tags: packages
 
-    - name: Ensure the PostgreSQL service is running
-      service: name=postgresql state=started enabled=yes
+   - name: install PostgresSQL
+     apt: name={{ item }} update_cache=true state=installed
+     with_items:
+       - postgresql
+       - postgresql-contrib
+       - libpq-dev
+       - python-psycopg2
+     tags: packages
 
-    - name: Ensure database is created
-      sudo_user: postgres
-      postgresql_db: name=ansible_data
-                encoding='UTF-8'
-                lc_collate='en_US.UTF-8'
-                lc_ctype='en_US.UTF-8'
-                template='template0'
-                state=present
+   - name: Ensure the PostgreSQL service is running
+     service: name=postgresql state=started enabled=yes
 
-    - name: manage permitions
-      sudo_user: postgres
-      postgresql_user: db=ansible_data
-                  name=user
-                  password=pwd123
-                  priv=ALL
-                  state=present
+   - name: Ensure database is created
+     sudo_user: postgres
+     postgresql_db: name=ansible_data
+               encoding='UTF-8'
+               lc_collate='en_US.UTF-8'
+               lc_ctype='en_US.UTF-8'
+               template='template0'
+               state=present
 
-    - name: check database
-      sudo_user: postgres
-      postgresql_user: name=user
-                  role_attr_flags=NOSUPERUSER,NOCREATEDB
-                  state=pr
+   - name: manage permitions
+     sudo_user: postgres
+     postgresql_user: db=ansible_data
+                 name=user
+                 password=pwd123
+                 priv=ALL
+                 state=present
+
+   - name: check database
+     sudo_user: postgres
+     postgresql_user: name=user
+                 role_attr_flags=NOSUPERUSER,NOCREATEDB
+                 state=pr
