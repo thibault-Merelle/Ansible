@@ -1,5 +1,5 @@
 - name: set up azure-vm
-  hosts: azure-vm-thibault
+  hosts: azure-vm
   become: yes
   become_method: sudo
   remote_user: azureuser
