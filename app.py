@@ -11,6 +11,7 @@ from flask import (
 from logger import log
 from db import DB
 
+mydb = DB()
 
 
 
@@ -48,9 +49,9 @@ def index():
 def id(name='undefine'):
     r = request.form
     user = r['user']
-    max_users = DB.get_max()
+    max_users = mydb.get_max()
     if not user:
-        DB.insert_user(name)
+        mydb.insert_user(name)
         return render_template('id.html', name=name) 
     else:
         return render_template('id.html', name=user) 
@@ -58,13 +59,13 @@ def id(name='undefine'):
 @log
 @app.route('/json', methods=['GET'])
 def results():
-    resp = jsonify(DB.get_users())
+    resp = jsonify(mydb.get_users())
     return resp
 
 # @app.route("/inc", methods=['GET'])
 # @log
 # def inc():
-#     DB.insert_user(name)
+#     mydb.insert_user(name)
 
 
 
@@ -85,7 +86,7 @@ def hello(name):
 
 
 if __name__ == '__main__':
-    DB.del_table()
-    DB.set_table()
-    DB.test_insert()
+    mydb.del_table()
+    mydb.set_table()
+    mydb.test_insert()
     app.run(host='0.0.0.0', port=os.environ['FLASK_RUN_PORT'], debug=True)
