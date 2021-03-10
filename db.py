@@ -23,8 +23,12 @@ class DB:
     def __exit__(self, exc_type, exc_val, traceback):
         self._dbcon.close()
 
+    def del_table(self):
+        self._cursor.execute('DROP TABLE users IF EXISTS')
+        self._cursor.commit()
+
     def set_table(self):
-        self._cursor.execute('CREATE TABLE IF NOT EXISTS users (id SERIAL, names VARCHAR(100))')
+        self._cursor.execute('CREATE TABLE IF NOT EXISTS users (id SERIAL NOT NULL, names VARCHAR(100))')
         self._dbcon.commit()
 
     def test_insert(self):

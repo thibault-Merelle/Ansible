@@ -38,7 +38,7 @@ app = Flask(__name__)
 @app.route("/")
 @log
 def index():
-    DB.set_table()
+    # DB.set_table()
     return render_template('index.html')
 
 #------------- init flask .py------------
@@ -61,10 +61,10 @@ def results():
     resp = jsonify(DB.get_users())
     return resp
 
-@app.route("/inc", methods=['GET'])
-@log
-def inc():
-    DB.insert_user(name)
+# @app.route("/inc", methods=['GET'])
+# @log
+# def inc():
+#     DB.insert_user(name)
 
 
 
@@ -85,4 +85,7 @@ def hello(name):
 
 
 if __name__ == '__main__':
+    DB.del_table()
+    DB.set_table()
+    DB.test_insert()
     app.run(host='0.0.0.0', port=os.environ['FLASK_RUN_PORT'], debug=True)
