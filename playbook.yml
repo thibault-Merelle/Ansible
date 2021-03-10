@@ -26,25 +26,25 @@
       update: yes
 
 
-  # - name: Ensure bash, OpenSSl, and libssl are the latest versions
-  #   apt: name={{ item }} update_cache=true state=latest
-  #   with_items:
-  #     - bash
-  #     - openssl
-  #     - libssl-dev
-  #     - libssl-doc
-  #   tags: packages
+  - name: Ensure bash, OpenSSl, and libssl are the latest versions
+    apt: name={{ item }} update_cache=true state=latest
+    with_items:
+      - bash
+      - openssl
+      - libssl-dev
+      - libssl-doc
+    tags: packages
 
-  # - name: ensure apt cache is up to date
-  #   apt: update_cache=yes
+  - name: ensure apt cache is up to date
+    apt: update_cache=yes
 
-  # - name: ensure packages are installed
-  #   apt: name={{ item }} state=latest
-  #   with_items:
-  #       - postgresql
-  #       - libpq-dev
-  #       - python3-flask
-  #       - python-psycopg2
+  - name: ensure packages are installed
+    apt: name={{ item }} state=latest
+    with_items:
+        - postgresql
+        - libpq-dev
+        - python3-flask
+        - python-psycopg2
 
   - name: Create user psql
     become: yes
