@@ -32,7 +32,7 @@ class DB:
         self._dbcon.commit()
 
     def test_insert(self):
-        self._cursor.execute('INSERT INTO users (names) values ('Martin'), ('Arthur')')
+        self._cursor.execute('INSERT INTO users (names) VALUES ('Martin', 'Arthur')')
         self._dbcon.commit()
 
     def insert_user(self, name):
