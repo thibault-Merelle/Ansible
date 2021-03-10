@@ -28,11 +28,11 @@ class DB:
         self._cursor.commit()
 
     def set_table(self):
-        self._cursor.execute('CREATE TABLE IF NOT EXISTS users (id SERIAL NOT NULL, names VARCHAR(100))')
+        self._cursor.execute('CREATE TABLE IF NOT EXISTS users (id SERIAL NOT NULL, names VARCHAR(100) NOT NULL)')
         self._dbcon.commit()
 
     def test_insert(self):
-        self._cursor.execute('INSERT INTO users (names) VALUES ('Martin', 'Arthur')')
+        self._cursor.execute("INSERT INTO users (names) VALUES ('Martin', 'Arthur');")
         self._dbcon.commit()
 
     def insert_user(self, name):
