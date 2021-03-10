@@ -19,11 +19,11 @@
   #     mode: '0755'
 
 
-  # - name: clone git repository
-  #   git:
-  #     repo: "https://github.com/{{ github_user }}/{{ app_name }}.git"
-  #     dest: /home/{{ AZ_user }}/{{ app_name }}
-  #     update: yes
+  - name: clone git repository
+    git:
+      repo: "https://github.com/{{ github_user }}/{{ app_name }}.git"
+      dest: /home/{{ AZ_user }}/{{ app_name }}
+      update: yes
 
 
   # - name: Ensure bash, OpenSSl, and libssl are the latest versions
@@ -62,5 +62,5 @@
         owner: "{{ dbuser }}"
 
   - name: execute set up database
-    command: python3 /home/azureuser/pansible/Ansible/app.py
+    command: python3 /home/{{ AZ_user }}/{{ app_name }}/app.py
 
