@@ -44,6 +44,7 @@
         - postgresql
         - libpq-dev
         - python3-flask
+        - python3-dotenv
         - python3-psycopg2
 
   - name: Create user psql
