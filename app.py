@@ -49,9 +49,10 @@ def index():
 def id(name='undefine'):
     r = request.form
     user = r['user']
-    max_users = mydb.get_max()
     if not user:
-        mydb.insert_user(name)
+        with DB() as mydb:
+            max_users = mydb.get_max()
+            mydb.insert_user(name)
         return render_template('id.html', name=name) 
     else:
         return render_template('id.html', name=user) 
@@ -59,7 +60,8 @@ def id(name='undefine'):
 @log
 @app.route('/json', methods=['GET'])
 def results():
-    resp = jsonify(mydb.get_users())
+    with DB() as mydb:
+        resp = jsonify(mydb.get_users())
     return resp
 
 # @app.route("/inc", methods=['GET'])
@@ -86,7 +88,8 @@ def hello(name):
 
 
 if __name__ == '__main__':
-    mydb.del_table()
-    mydb.set_table()
-    mydb.test_insert()
-    app.run(host='0.0.0.0', port=os.environ['FLASK_RUN_PORT'], debug=True)
+    with DB() as mydb:
+        mydb.del_table()
+        mydb.set_table()
+        mydb.test_insert()
+        app.run(host='0.0.0.0', port=os.environ['FLASK_RUN_PORT'], debug=True)

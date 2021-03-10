@@ -42,6 +42,14 @@ Creates an ansible playbook allowing to deploy a simple application on a VM
 	    [azure-vm]
 		13.77.137.96
 
+		[azure-vm:vars]
+		dbname=ansible_data
+		dbuser=user
+		dbpassword=pwd123
+		github_user=thibault-Merelle
+		AZ_user=azureuser
+		app_name=Ansible
+
 
 ## install and run :
 
