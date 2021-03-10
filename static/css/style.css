@@ -1,0 +1,33 @@
+body{
+    background-image: radial-gradient(circle, #252929, #114f45, #00754d, #3a9a3e, #82bc00);
+}
+
+h1, h2{
+    text-align: center;
+    color: azure;
+    text-shadow: 2px 2px #353636;
+    padding-top: 1.5rem;
+}
+
+
+.wrapper{
+    margin: 0 auto;
+    color: azure;
+    text-shadow: 2px 2px #353636;
+    padding-top: 1rem;
+}
+
+
+button, input{
+    background-color: #3a9a3e;
+    text-decoration: none;
+    color: azure;
+    text-shadow: 1px 1px #353636;
+}
+
+#max_log{
+    margin: 0 auto;
+    color: azure;
+    text-shadow: 2px 2px #353636;
+    padding-top: 1.5rem;
+}
