@@ -2,7 +2,7 @@
   hosts: azure-vm
   become: yes
   become_method: sudo
-  remote_user: azureuser
+  remote_user: "{{ AZ_user }}"
 
   tasks:
 
