@@ -94,4 +94,5 @@ if __name__ == '__main__':
         mydb.del_table()
         mydb.set_table()
         mydb.test_insert()
-        app.run(host='0.0.0.0', port=int(os.environ['FLASK_RUN_PORT']), debug=True)
+        app.run(host='0.0.0.0', port=3000, debug=True)
+        # os.environ['FLASK_RUN_PORT']
