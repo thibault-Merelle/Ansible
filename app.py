@@ -48,8 +48,8 @@ def id(name='undefine'):
         return render_template('id.html', name=name) 
     else:
         with DB() as mydb:
-            max_users = mydb.get_max()
             mydb.insert_user(user)        
+            max_users = mydb.get_max()
         return render_template('id.html', name=user, max_users=max_users) 
 
 @app.route('/json', methods=['GET'])
