@@ -39,7 +39,7 @@ class DB:
         self._dbcon.commit()
 
     def insert_user(self, user):
-        self._cursor.execute("INSERT INTO users (names) VALUES (%s);", (myuser,))
+        self._cursor.execute("INSERT INTO users (names) VALUES (%s);", (user,))
         self._dbcon.commit()
 
     def get_users(self):
