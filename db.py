@@ -26,7 +26,7 @@ class DB:
         self._dbcon.close()
 
     def del_table(self):
-        self._cursor.execute('DROP TABLE users IF EXISTS')
+        self._cursor.execute('DROP TABLE IF EXISTS users')
         self._dbcon.commit()
 
     def set_table(self):
