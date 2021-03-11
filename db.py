@@ -43,7 +43,7 @@ class DB:
         # query = "INSERT INTO users (names) VALUES (%s);"
         # self._cursor.execute(query, user)
         # self._cursor.execute("INSERT INTO users (names) VALUES (:user);")
-        self._cursor.execute("INSERT INTO users (names) VALUES (%s);", (myuser))
+        self._cursor.execute("INSERT INTO users (names) VALUES (%s);", (myuser,))
         self._dbcon.commit()
 
     def get_users(self):
