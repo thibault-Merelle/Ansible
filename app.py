@@ -54,7 +54,7 @@ def id(name='undefine'):
     if not user:
         with DB() as mydb:
             max_users = mydb.get_max()
-            mydb.insert_user(name)
+            mydb.insert_user(user)
         return render_template('id.html', name=name) 
     else:
         return render_template('id.html', name=user) 

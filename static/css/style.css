@@ -6,7 +6,7 @@ h1, h2{
     text-align: center;
     color: azure;
     text-shadow: 2px 2px #353636;
-    padding-top: 1.5rem;
+    margin-top: 1.5rem;
 }
 
 
@@ -14,7 +14,7 @@ h1, h2{
     margin: 0 auto;
     color: azure;
     text-shadow: 2px 2px #353636;
-    padding-top: 1rem;
+    margin-top: 1rem;
 }
 
 
@@ -23,11 +23,12 @@ button, input{
     text-decoration: none;
     color: azure;
     text-shadow: 1px 1px #353636;
+    margin-top: 2rem;
 }
 
 #max_log{
     margin: 0 auto;
     color: azure;
     text-shadow: 2px 2px #353636;
-    padding-top: 1.5rem;
+    margin-top: 1.5rem;
 }
