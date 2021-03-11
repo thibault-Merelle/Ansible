@@ -45,9 +45,10 @@ def index():
     return render_template('index.html')
 
 #------------- init flask .py------------
-@log
+
 @app.route('/id', methods=['GET', 'POST'])
 @app.route('/id/<name>', methods=['GET', 'POST'])
+@log
 def id(name='undefine'):
     r = request.form
     user = r['user']
@@ -57,10 +58,10 @@ def id(name='undefine'):
         with DB() as mydb:
             max_users = mydb.get_max()
             mydb.insert_user(user)        
-        return render_template('id.html', name=user) 
+        return render_template('id.html', name=user, max_users=max_users) 
 
-@log
 @app.route('/json', methods=['GET'])
+@log
 def results():
     with DB() as mydb:
         resp = jsonify(mydb.get_users())
@@ -73,18 +74,18 @@ def results():
 
 
 
-@log
 @app.errorhandler(404)
+@log
 def page_not_found(error):
     return 'This page does not exist', 404
 
-@log
 @app.errorhandler(500)
+@log
 def special_exception_handler(error):
     return 'Database connection failed', 500
 
-@log
 @app.route('/hello/<name>')
+@log
 def hello(name):
     return 'Hello {} !'.format(name.capitalize())
 
