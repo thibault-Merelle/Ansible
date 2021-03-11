@@ -52,11 +52,11 @@ def id(name='undefine'):
     r = request.form
     user = r['user']
     if not user:
-        with DB() as mydb:
-            max_users = mydb.get_max()
-            mydb.insert_user(user)
         return render_template('id.html', name=name) 
     else:
+        with DB() as mydb:
+            max_users = mydb.get_max()
+            mydb.insert_user(user)        
         return render_template('id.html', name=user) 
 
 @log
