@@ -1,8 +1,8 @@
 import psycopg2
 import os
-from dotenv import load_dotenv, find_dotenv
+from dotenv import load_dotenv
 import sys
-load_dotenv(find_dotenv())
+dotenv.load_dotenv('/home/azureuser/Ansible/.env')
 
 class DB:
     def __init__(self):
