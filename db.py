@@ -40,7 +40,7 @@ class DB:
 
     def insert_user(self, user):
         query = "INSERT INTO users (names) VALUES (%s);"
-        self._cursor.execute(query, str(user))
+        self._cursor.execute(query, user)
         self._dbcon.commit()
 
     def get_users(self):
