@@ -38,9 +38,9 @@ class DB:
         self._cursor.execute("INSERT INTO users (names) VALUES ('John');")
         self._dbcon.commit()
 
-    def insert_user(self, name):
-        query = 'INSERT INTO users (names) values (%s)'
-        self._cursor.execute(query, name)
+    def insert_user(self, user):
+        query = "INSERT INTO users (names) VALUES (%s);"
+        self._cursor.execute(query, str(user))
         self._dbcon.commit()
 
     def get_users(self):
