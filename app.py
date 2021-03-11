@@ -1,6 +1,7 @@
 import logging
 import os
 import sys
+from dotenv import load_dotenv
 
 from flask import (
     Flask,
@@ -11,6 +12,7 @@ from flask import (
 from logger import log
 from db import DB
 
+load_dotenv('/home/azureuser/Ansible/.env')
 mydb = DB()
 
 
