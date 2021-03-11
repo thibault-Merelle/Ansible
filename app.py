@@ -29,14 +29,6 @@ logging.basicConfig(filename="LOG_ansible.log",
 app = Flask(__name__)
 
 
-    # "GET /" pour renvoyer le template de bienvenue
-
-    # "GET /inc" qui incrément l'id dans la bdd
-
-    # "GET /id" qui renvoie l'id en cours
-
-
-
 
 @app.route("/")
 @log
@@ -58,7 +50,7 @@ def id(name='undefine'):
         with DB() as mydb:
             max_users = mydb.get_max()
             mydb.insert_user(user)        
-        return render_template('id.html', name=user, max_users=max_users) 
+        return render_template('id.html', name=user, max_users=max_users[0]) 
 
 @app.route('/json', methods=['GET'])
 @log
