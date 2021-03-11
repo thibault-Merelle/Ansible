@@ -1,7 +1,8 @@
 import psycopg2
 import os
-from dotenv import load_dotenv, find_dotenv
+from dotenv import load_dotenv
 import sys
+load_dotenv()
 
 class DB:
     def __init__(self):
@@ -9,13 +10,12 @@ class DB:
 
     def __enter__(self):
         try:
-            load_dotenv(find_dotenv())
             self._dbcon = psycopg2.connect(
-                host=os.environ.get['AZ_POSTGRES_HOST'],
-                user=os.environ.get['AZ_POSTGRES_USER'],
-                password=os.environ.get['AZ_POSTGRES_PASSWORD'],
-                database=os.environ.get['AZ_POSTGRES_DATABASE'],
-                port=os.environ.get['AZ_POSTGRES_PORT']
+                host=os.environ['AZ_POSTGRES_HOST'],
+                user=os.environ['AZ_POSTGRES_USER'],
+                password=os.environ['AZ_POSTGRES_PASSWORD'],
+                database=os.environ['AZ_POSTGRES_DATABASE'],
+                port=os.environ['AZ_POSTGRES_PORT']
             )
             self._cursor = self._dbcon.cursor()
             return self
