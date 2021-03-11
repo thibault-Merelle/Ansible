@@ -1,8 +1,8 @@
 import psycopg2
 import os
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 import sys
-load_dotenv()
+load_dotenv(find_dotenv())
 
 class DB:
     def __init__(self):
