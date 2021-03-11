@@ -40,10 +40,12 @@ button, input{
 }
 
 #jinja{
-    font-size: x-large;
+    font-size: xx-large;
+    font-weight: bold;
     margin-top: 1rem;
     color:azure;
     text-shadow: 2px 2px #353636;
     text-align: center;
+    margin: 0 auto;
 
 }
