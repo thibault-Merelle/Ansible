@@ -39,9 +39,11 @@ class DB:
         self._dbcon.commit()
 
     def insert_user(self, user):
+        myuser = str(user)
         # query = "INSERT INTO users (names) VALUES (%s);"
         # self._cursor.execute(query, user)
-        self._cursor.execute("INSERT INTO users (names) VALUES (:user);")
+        # self._cursor.execute("INSERT INTO users (names) VALUES (:user);")
+        self._cursor.execute("INSERT INTO users (names) VALUES (%s);", (myuser))
         self._dbcon.commit()
 
     def get_users(self):
@@ -51,6 +53,6 @@ class DB:
         return users #jsonify sur le app.py
 
     def get_max(self):
-        self._cursor.execute('SELECT MAX(id) from users;')
+        self._cursor.execute("SELECT MAX(id) from users;")
         max_id = self._cursor.fetchall()
-        return max_id
+        return str(max_id[0])
