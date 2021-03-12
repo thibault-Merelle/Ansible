@@ -27,6 +27,7 @@ button, input{
     background-color: #3a9a3e;
     text-decoration: none;
     color: azure;
+    font-weight: bold;
     text-shadow: 1px 1px #353636;
     margin-top: 2rem;
     margin-bottom: 2rem;
@@ -42,5 +43,4 @@ button, input{
 
 #jinja{
     font-size: xx-large;
-    font-weight: bold;
 }

@@ -51,4 +51,4 @@ class DB:
     def get_max(self):
         self._cursor.execute("SELECT id from users ORDER BY id DESC LIMIT 1;")
         max_id = self._cursor.fetchall()
-        return str(max_id)
+        return str(max_id[0])

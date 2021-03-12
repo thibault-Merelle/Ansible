@@ -49,7 +49,7 @@ def id(name='undefine'):
     else:
         with DB() as mydb:
             mydb.insert_user(user)        
-            max_users = mydb.get_max()
+            max_users = mydb.get_max().split(",")
         return render_template('id.html', name=user, max_users=max_users) 
 
 @app.route('/json', methods=['GET'])
