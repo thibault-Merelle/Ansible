@@ -24,7 +24,6 @@ logging.basicConfig(filename="LOG_ansible.log",
                     datefmt='[%Y-%m-%d %H:%M:%S]')
 
 
-
 app = Flask(__name__)
 
 
