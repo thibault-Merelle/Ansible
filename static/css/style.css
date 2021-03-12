@@ -23,10 +23,11 @@ form{
 }
 
 
-button, input{
+button, input, a:link{
     background-color: #3a9a3e;
     text-decoration: none;
     color: azure;
+    font-size: x-large;
     font-weight: bold;
     text-shadow: 1px 1px #353636;
     margin-top: 2rem;
