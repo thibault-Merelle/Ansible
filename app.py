@@ -52,7 +52,7 @@ def id(name='undefine'):
         return render_template('index.html', checking=False)
     else:
         with DB() as mydb:
-            mydb.insert_user(user)        
+            # mydb.insert_user(user)        
             max_users = mydb.get_max().strip(",()")
         return render_template('id.html', name=user, max_users=max_users) 
 
