@@ -30,7 +30,7 @@ app = Flask(__name__)
 
 
 
-@app.route("/")
+@app.route("/", methods=['GET'])
 @log
 def index():
     # DB.set_table()
@@ -44,12 +44,10 @@ def index():
 def id(name='undefine'):
     r = request.form
     user = r['user']
-    with DB() as mydb:
-        checking = mydb.check_user(user)
     if not user:
         return render_template('id.html', name=name) 
-    elif checking == True:
-        return render_template('index.html', checking=checking )
+    elif checking == False:
+        return render_template('index.html', checking=False)
     else:
         with DB() as mydb:
             mydb.insert_user(user)        

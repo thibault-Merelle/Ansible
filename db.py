@@ -30,7 +30,7 @@ class DB:
         self._dbcon.commit()
 
     def set_table(self):
-        self._cursor.execute('CREATE TABLE IF NOT EXISTS users (id SERIAL NOT NULL, names VARCHAR(100) NOT NULL)')
+        self._cursor.execute('CREATE TABLE IF NOT EXISTS users (id SERIAL PRIMARY KEY, names VARCHAR(100) NOT NULL, UNIQUE(names))')
         self._dbcon.commit()
 
     def test_insert(self):
@@ -38,14 +38,18 @@ class DB:
         self._cursor.execute("INSERT INTO users (names) VALUES ('John');")
         self._dbcon.commit()
 
-    def check_user(self, user):
-        self._cursor.execute("SELECT EXISTS(SELECT 1 FROM users WHERE names LIKE (%s));", (user,))
-        exist = self._cursor.fetchall()
-        return exist
+    # def check_user(self, user):
+    #     self._cursor.execute("SELECT EXISTS(SELECT 1 FROM users WHERE names LIKE (%s));", (user))
+    #     exist = self._cursor.fetchall()
+    #     return exist
 
     def insert_user(self, user):
-        self._cursor.execute("INSERT INTO users (names) VALUES (%s);", (user,))
-        self._dbcon.commit()
+        try:
+            self._cursor.execute("INSERT INTO users (names) VALUES (%s);", (user,))
+            self._dbcon.commit()
+            return checking = True
+        except:
+            return checking = False
 
     def get_users(self):
         self._cursor.execute('SELECT * from users;')
