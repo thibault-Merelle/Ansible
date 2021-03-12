@@ -47,9 +47,9 @@ class DB:
         try:
             self._cursor.execute("INSERT INTO users (names) VALUES (%s);", (user,))
             self._dbcon.commit()
-            return checking = True
+            return True
         except:
-            return checking = False
+            return False
 
     def get_users(self):
         self._cursor.execute('SELECT * from users;')
