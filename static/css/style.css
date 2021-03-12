@@ -7,7 +7,6 @@ h1, h2{
     text-align: center;
     color: azure;
     text-shadow: 2px 2px #353636;
-    padding-top: 1.5rem;
 }
 
 form{
@@ -17,8 +16,6 @@ form{
 
 .wrapper{
     margin: 0 auto;
-    color: azure;
-    text-shadow: 2px 2px #353636;
     margin-top: 1rem;
 }
 

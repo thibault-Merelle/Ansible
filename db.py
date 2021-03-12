@@ -38,6 +38,11 @@ class DB:
         self._cursor.execute("INSERT INTO users (names) VALUES ('John');")
         self._dbcon.commit()
 
+    def check_user(self, user):
+        self._cursor.execute("SELECT names FROM users WHERE names LIKE (%s);", (user,))
+        exist = self._cursor.fetchall()
+        return exist
+
     def insert_user(self, user):
         self._cursor.execute("INSERT INTO users (names) VALUES (%s);", (user,))
         self._dbcon.commit()

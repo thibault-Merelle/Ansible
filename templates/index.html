@@ -13,6 +13,11 @@
                     <input type="text" name="user" maxlength="12" size="14" placeholder="enter your name" value="{{ user }}"><br>
                     <input type="submit" placeholder="Save me">
                 </form>
+                <div id="jinja">
+                    {% if checking == true %}
+                    <h2>User unavailable, choose another !</h2>
+                    {% endif %}
+                </div>
             </center>
         </div>
     </body>

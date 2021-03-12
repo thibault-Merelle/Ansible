@@ -44,8 +44,11 @@ def index():
 def id(name='undefine'):
     r = request.form
     user = r['user']
+    checking = DB().check_user(user)
     if not user:
         return render_template('id.html', name=name) 
+    elif checking == True:
+        return render_template('index.html', checking=checking )
     else:
         with DB() as mydb:
             mydb.insert_user(user)        
