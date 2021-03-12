@@ -25,7 +25,6 @@ logging.basicConfig(filename="LOG_ansible.log",
 
 
 
-
 app = Flask(__name__)
 
 
@@ -46,14 +45,15 @@ def id(name='undefine'):
     user = r['user']
     with DB() as mydb:
         checking = mydb.insert_user(user) 
+        max_users = mydb.get_max().strip(",()")
     if not user:
-        return render_template('id.html', name=name) 
+        return render_template('index.html') 
     elif checking == False:
         return render_template('index.html', checking=False)
     else:
-        with DB() as mydb:
+        # with DB() as mydb:
             # mydb.insert_user(user)        
-            max_users = mydb.get_max().strip(",()")
+            # max_users = mydb.get_max().strip(",()")
         return render_template('id.html', name=user, max_users=max_users) 
 
 @app.route('/json', methods=['GET'])
