@@ -39,7 +39,7 @@ class DB:
         self._dbcon.commit()
 
     def check_user(self, user):
-        self._cursor.execute("SELECT names FROM users WHERE names LIKE (%s);", (user,))
+        self._cursor.execute("SELECT EXISTS(SELECT 1 FROM users WHERE names LIKE (%s));", (user,))
         exist = self._cursor.fetchall()
         return exist
 
