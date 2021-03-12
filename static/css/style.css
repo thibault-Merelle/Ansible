@@ -29,6 +29,7 @@ button, input, a:link{
     text-shadow: 1px 1px #353636;
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
+    border-radius: 2px;
 }
 
 #max_log{
