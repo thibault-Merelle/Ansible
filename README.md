@@ -7,7 +7,7 @@ this project is part of our courses at simplon school
 
 # Flask server with ansible :
 
-Creates an ansible playbook allowing to deploy a simple application on a VM
+Creates an ansible playbook allowing to deploy a simple Flask application on a VM (with PostgreSQL db localy)
 
 # Specifications:
 
