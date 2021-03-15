@@ -24,42 +24,61 @@ Creates an ansible playbook allowing to deploy a simple application on a VM
 - Flask
 - jinja2
 
+## Architecture:
+
+    |- app.py
+    |- db.py
+    |- .env
+    |- playbook.yml
+    |- hosts
+    |- logger.py
+    |- static:
+	       |- css:
+		       |- style.css
+    |- templates:
+		    |- id.html
+		    |- index.html
+
+ - app.py : main script in flask
+ - db.py : class DB used to store query functions
+ - .env : store your environnement variables
+ - playbook.yml : orchestration script to build your VM
+ - hosts : store your ansible environnement variables
+ - logger.py : set decoration loggers
+ - statics && templates : resources for flask
+
 ## Building your environment variables : 
 
 - set a .env file in the root directory as follow :
 
     	    AZ_POSTGRES_HOST="VM-IP-adress"
-		    AZ_POSTGRES_USER=user
-		    AZ_POSTGRES_PASSWORD=pwd123
+		    AZ_POSTGRES_USER=your_user
+		    AZ_POSTGRES_PASSWORD=your_password
 		    AZ_POSTGRES_DATABASE=postgres
 		    AZ_POSTGRES_PORT=22
 		    FLASK_RUN_PORT=3000
 
 
-- If needed in hosts file set your VM IPaddress :
+- If needed in hosts file set your VM IPaddress like :
 		
 
 	    [azure-vm]
 		13.77.137.96
 
-		[azure-vm:vars]
-		dbname=ansible_data
-		dbuser=user
-		dbpassword=pwd123
-		github_user=thibault-Merelle
-		AZ_user=azureuser
-		app_name=Ansible
-
 
 ## install and run :
 
-1.  Clone this repository.
+ 1. Be sure to have ansible install on your machine:
+ 
+	 https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
+
+ 3.  Clone this repository.
 
 	    git clone https://github.com/thibault-Merelle/Ansible.git
     
-2. Execute ansible on root directory as following :
+ 4. Execute ansible on root directory as following :
 
-	    ansible-playbook -i host votre_playbook.yml
+	    ansible-playbook -i host playbook.yml
 
 ## routes:
 
