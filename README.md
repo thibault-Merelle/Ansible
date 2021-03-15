@@ -24,6 +24,27 @@ Creates an ansible playbook allowing to deploy a simple application on a VM
 - Flask
 - jinja2
 
+## install and run :
+
+ 1. Be sure to have ansible install on your machine:
+ 
+	 https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
+
+ 2.  Clone this repository.
+
+	    git clone https://github.com/thibault-Merelle/Ansible.git
+    
+ 3. Execute ansible on root directory as following :
+
+	    ansible-playbook -i host playbook.yml
+
+ 4. finally, in your browser, go to the following address (where your need to call your own VM-IP) 
+	
+
+		 http://13.77.137.96:3000
+
+
+
 ## Architecture:
 
     |- app.py
@@ -66,33 +87,20 @@ Creates an ansible playbook allowing to deploy a simple application on a VM
 		13.77.137.96
 
 
-## install and run :
+## output port: 
+- Flask => 3000
+- Postgres => 22
 
- 1. Be sure to have ansible install on your machine:
- 
-	 https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
-
- 3.  Clone this repository.
-
-	    git clone https://github.com/thibault-Merelle/Ansible.git
-    
- 4. Execute ansible on root directory as following :
-
-	    ansible-playbook -i host playbook.yml
 
 ## routes:
 
  - "/"  => welcomming page with input "name"
+ 
  
  - "/id" => print page who shows :
 		 - number of names stores in database
 		 - name of the current user
 		 
 - "/json" => showing my table with json 
-
-## output port: 
-- Flask => 3000
-- Postgres => 22
-
 
 
